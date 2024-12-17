@@ -1,12 +1,51 @@
-- 👋 Hi, I’m @mohmad{>-}
-- 👀 I’m interested in ..<>
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+import pygame
 
-<!---(input
-mohmad is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+# تهيئة Pygame
+pygame.init()
+
+# إعدادات النافذة
+WIDTH, HEIGHT = 500, 500
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Simple Moving Game")
+
+# ألوان
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+
+# إعدادات الكرة
+ball_radius = 15
+ball_x = WIDTH // 2
+ball_y = HEIGHT // 2
+ball_speed = 5
+
+# الحلقة الرئيسية للعبة
+running = True
+while running:
+    # التحقق من الأحداث
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    # الحصول على مفاتيح الأسهم
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        ball_x -= ball_speed
+    if keys[pygame.K_RIGHT]:
+        ball_x += ball_speed
+    if keys[pygame.K_UP]:
+        ball_y -= ball_speed
+    if keys[pygame.K_DOWN]:
+        ball_y += ball_speed
+    
+    # تحديث الشاشة
+    screen.fill(WHITE)
+    pygame.draw.circle(screen, RED, (ball_x, ball_y), ball_radius)
+    
+    # تحديث العرض
+    pygame.display.flip()
+
+    # التحكم في سرعة اللعبة
+    pygame.time.Clock().tick(60)
+
+# إنهاء Pygame
+pygame.quit()
